@@ -1,0 +1,103 @@
+version: v1
+
+labels:
+  - label: "c-all"
+    matcher:
+      files: "*"
+
+  - label: "c-book"
+    sync: true
+    matcher:
+      files: "book/**/*"
+
+  - label: "c-cache"
+    sync: true
+    matcher:
+      files: "twilight-cache-inmemory/**/*"
+
+  - label: "c-gateway"
+    sync: true
+    matcher:
+      files: "twilight-gateway/**/*"
+
+  - label: "c-gateway-queue"
+    sync: true
+    matcher:
+      files: "twilight-gateway-queue/**/*"
+
+  - label: "c-http"
+    sync: true
+    matcher:
+      files: "twilight-http/**/*"
+
+  - label: "c-http-ratelimiting"
+    sync: true
+    matcher:
+      files: "twilight-http-ratelimiting/**/*"
+
+  - label: "c-lavalink"
+    sync: true
+    matcher:
+      files: "twilight-lavalink/**/*"
+
+  - label: "c-mention"
+    sync: true
+    matcher:
+      files: "twilight-mention/**/*"
+
+  - label: "c-model"
+    sync: true
+    matcher:
+      files: "twilight-model/**/*"
+
+  - label: "c-standby"
+    sync: true
+    matcher:
+      files: "twilight-standby/**/*"
+
+  - label: "c-util"
+    sync: true
+    matcher:
+      files: "twilight-util/**/*"
+
+  - label: "c-validate"
+    sync: true
+    matcher:
+      files: "twilight-validate/**/*"
+
+  - label: "m-breaking change"
+    matcher:
+      title: "^[a-z]+(\\(.+\\))?!: .*"
+
+  - label: "t-build"
+    matcher:
+      title: "^build(\\(.+\\))?!?: .*"
+
+  - label: "t-ci"
+    matcher:
+      files: ".github/workflows/*"
+      title: "^ci: .*"
+
+  - label: "t-docs"
+    matcher:
+      title: "^docs(\\(.+\\))?!?: .*"
+
+  - label: "t-feature"
+    matcher:
+      title: "^feat(\\(.+\\))?!?: .*"
+
+  - label: "t-fix"
+    matcher:
+      title: "^fix(\\(.+\\))?!?: .*"
+
+  - label: "t-perf"
+    matcher:
+      title: "^perf(\\(.+\\))?!?: .*"
+
+  - label: "t-refactor"
+    matcher:
+      title: "^refactor(\\(.+\\))?!?: .*"
+
+  - label: "t-test"
+    matcher:
+      title: "^test(\\(.+\\))?!?: .*"

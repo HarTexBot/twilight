@@ -1,0 +1,16 @@
+[book]
+authors = ["Twilight Contributors"]
+description = "Powerful asynchronous, flexible, and scalable ecosystem of Rust libraries for the Discord API."
+language = "en"
+multilingual = true
+src = "src"
+title = "Twilight"
+
+[rust]
+edition = "2021"
+
+[output.html]
+default-theme = "rust"
+
+[output.html.playground]
+runnable = false

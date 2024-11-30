@@ -1,0 +1,61 @@
+name: Deploy documentation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/**"
+      - "twilight*/**"
+      - "Cargo.toml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency: "pages"
+
+jobs:
+  deploy-docs:
+    environment:
+      name: api-documentation
+      url: ${{ steps.deployment.outputs.page_url }}
+    name: Deploy docs to gh-pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install nightly toolchain
+        uses: dtolnay/rust-toolchain@nightly
+
+      - name: Add problem matchers
+        run: echo "::add-matcher::.github/rust.json"
+
+      - name: Build docs
+        env:
+          RUSTDOCFLAGS: --cfg docsrs
+          RUSTFLAGS: -C target-cpu=haswell
+        run: cargo doc --no-deps --all-features --workspace --exclude book
+
+      - name: Prepare docs
+        run: |
+          echo '<meta http-equiv="refresh" content="0;url=twilight/index.html">' > target/doc/index.html
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: target/doc
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
